@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+
+    <style>
+        body{
+            margin:0;
+            font-family:Arial, sans-serif;
+            background:#f1f3f6;
+        }
+
+        .container{
+            width:800px;
+            margin:80px auto;
+            display:flex;
+            background:white;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+        }
+
+        .left{
+            width:40%;
+            background:#2874f0;
+            color:white;
+            padding:40px;
+        }
+
+        .right{
+            width:60%;
+            padding:40px;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin-top:15px;
+            border:1px solid #ccc;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            margin-top:20px;
+            background:#fb641b;
+            color:white;
+            border:none;
+            font-size:16px;
+        }
+
+        a{
+            text-decoration:none;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="left">
+        <h2>Login</h2>
+        <p>Get access to your Orders, Wishlist and Recommendations.</p>
+    </div>
+
+    <div class="right">
+
+        <form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="username" placeholder="Username">
+
+    <input type="password" name="password" placeholder="Password">
+
+    <button type="submit">Login</button>
+</form>
+        <br>
+
+        <a href="#">New User? Register Here</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
