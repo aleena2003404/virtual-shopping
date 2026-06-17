@@ -73,3 +73,23 @@ from django.contrib.auth import logout
 def user_logout(request):
     logout(request)
     return redirect('login')
+def index(request):
+    return render(request, 'index.html')
+from .models import Order
+
+def checkout(request):
+
+    if request.method == 'POST':
+
+        Order.objects.create(
+            name=request.POST['name'],
+            phone=request.POST['phone'],
+            address=request.POST['address'],
+            total_amount=0
+        )
+
+        return redirect('success')
+
+    return render(request,'checkout.html')
+def success(request):
+    return render(request,'success.html')

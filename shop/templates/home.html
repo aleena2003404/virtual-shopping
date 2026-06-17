@@ -2,21 +2,25 @@
 <html>
 <head>
     <title>Virtual Shopping</title>
+
     <style>
+
         *{
             margin:0;
             padding:0;
             box-sizing:border-box;
+            font-family:'Segoe UI', sans-serif;
         }
 
         body{
-            font-family:Arial, sans-serif;
-            background:#f1f3f6;
+            background:#f5f5f5;
         }
+
+        /* Navbar */
 
         .navbar{
             background:#2874f0;
-            padding:15px 30px;
+            padding:15px 50px;
             display:flex;
             justify-content:space-between;
             align-items:center;
@@ -24,156 +28,249 @@
 
         .logo{
             color:white;
-            font-size:24px;
+            font-size:28px;
             font-weight:bold;
         }
 
         .search-box{
-            width:40%;
-            padding:10px;
+            width:45%;
+            padding:12px;
             border:none;
-            border-radius:5px;
+            border-radius:25px;
+            outline:none;
         }
 
         .menu a{
             color:white;
             text-decoration:none;
-            margin-left:20px;
+            margin-left:25px;
             font-weight:bold;
         }
 
-        .banner{
+        .menu a:hover{
+            color:yellow;
+        }
+
+        /* Hero Section */
+
+        .hero{
+            height:400px;
+            background:linear-gradient(rgba(0,0,0,0.5),
+            rgba(0,0,0,0.5)),
+            url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da');
+            background-size:cover;
+            background-position:center;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            color:white;
+        }
+
+        .hero-content h1{
+            font-size:55px;
+            margin-bottom:15px;
+        }
+
+        .hero-content p{
+            font-size:22px;
+            margin-bottom:20px;
+        }
+
+        .shop-btn{
+            background:#fb641b;
+            color:white;
+            padding:15px 30px;
+            text-decoration:none;
+            border-radius:30px;
+            font-size:18px;
+        }
+
+        /* Categories */
+
+        .categories{
+            display:flex;
+            justify-content:space-around;
             background:white;
             margin:20px;
-            padding:50px;
-            text-align:center;
-            border-radius:10px;
+            padding:20px;
+            border-radius:12px;
+            box-shadow:0px 2px 10px rgba(0,0,0,0.1);
         }
 
-        .banner h1{
+        .category{
+            text-align:center;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        .category:hover{
             color:#2874f0;
         }
-        .categories{
-    background:white;
-    margin:20px;
-    padding:20px;
-    display:flex;
-    justify-content:space-around;
-    border-radius:10px;
-}
 
-.category{
-    font-weight:bold;
-    cursor:pointer;
-}
+        /* Products */
 
-.category:hover{
-    color:#2874f0;
-}
-.products{
-    display:flex;
-    gap:20px;
-    padding:20px;
-    justify-content:center;
-}
+        .products-title{
+            text-align:center;
+            margin-top:30px;
+            color:#2874f0;
+        }
 
-.card{
-    background:white;
-    width:250px;
-    padding:15px;
-    text-align:center;
-    border-radius:10px;
-    box-shadow:0px 2px 5px rgba(0,0,0,0.2);
-}
+        .products{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:25px;
+            padding:30px;
+        }
 
-.card img{
-    width:100%;
-}
+        .card{
+            background:white;
+            width:260px;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0px 3px 12px rgba(0,0,0,0.15);
+            transition:0.3s;
+        }
 
-.card button{
-    background:#2874f0;
-    color:white;
-    border:none;
-    padding:10px 15px;
-    border-radius:5px;
-    cursor:pointer;
-}
-.card{
-    background:white;
-    width:250px;
-    padding:15px;
-    text-align:center;
-    border-radius:10px;
-    box-shadow:0px 2px 10px rgba(0,0,0,0.15);
-}
+        .card:hover{
+            transform:translateY(-8px);
+        }
 
-.card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-}
+        .card img{
+            width:100%;
+            height:230px;
+            object-fit:cover;
+        }
 
-.card h3{
-    margin-top:10px;
-}
+        .card-content{
+            padding:15px;
+            text-align:center;
+        }
 
-.card p{
-    color:green;
-    font-weight:bold;
-    margin:10px 0;
-}
+        .card-content h3{
+            margin-bottom:10px;
+        }
+
+        .price{
+            color:green;
+            font-size:20px;
+            font-weight:bold;
+            margin-bottom:15px;
+        }
+
+        .btn{
+            background:#2874f0;
+            color:white;
+            padding:10px 20px;
+            text-decoration:none;
+            border-radius:5px;
+        }
+
+        /* Footer */
+
+        footer{
+            background:#172337;
+            color:white;
+            text-align:center;
+            padding:20px;
+            margin-top:40px;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="navbar">
-        <div class="logo">Virtual Shopping</div>
+<div class="navbar">
 
-        <input type="text" placeholder="Search Products..." class="search-box">
+    <div class="logo">Virtual Shopping</div>
 
-       <div class="menu">
-    <a href="{% url 'login' %}">Login</a>
-    <a href="{% url 'register' %}">Register</a>
-    <a href="{% url 'cart' %}">Cart</a>
-</div>
+    <input type="text"
+           placeholder="Search Products..."
+           class="search-box">
+
+    <div class="menu">
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'cart' %}">Cart</a>
     </div>
-    <div class="banner">
+
+</div>
+
+<!-- Hero Banner -->
+
+<div class="hero">
+
+    <div class="hero-content">
+
         <h1>Welcome to Virtual Shopping</h1>
-        <p>Big Sale Up To 70% OFF</p>
+
+        <p>Shop Everything You Love At Best Prices</p>
+
+        <a href="#products" class="shop-btn">
+            Shop Now
+        </a>
+
     </div>
-    <div class="categories">
-    <div class="category">Mobiles</div>
-    <div class="category">Fashion</div>
-    <div class="category">Electronics</div>
-    <div class="category">Books</div>
-    <div class="category">Grocery</div>
-    <div class="category">Beauty</div>
+
 </div>
 
+<!-- Categories -->
 
-    
+<div class="categories">
+
+    <div class="category">📱 Mobiles</div>
+    <div class="category">👗 Fashion</div>
+    <div class="category">💻 Electronics</div>
+    <div class="category">📚 Books</div>
+    <div class="category">🛒 Grocery</div>
+    <div class="category">💄 Beauty</div>
+
+</div>
+
+<h2 class="products-title" id="products">
+    Featured Products
+</h2>
+
+<!-- Products -->
+
 <div class="products">
 
-    {% for product in products %}
-    <div class="card">
+{% for product in products %}
 
-        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+<div class="card">
+
+    <img src="{{ product.image.url }}"
+         alt="{{ product.name }}">
+
+    <div class="card-content">
 
         <h3>{{ product.name }}</h3>
 
-        <p>₹{{ product.price }}</p>
-        <a href="{% url 'product_detail' product.id %}">
-    <button>View Details</button>
-</a>
+        <div class="price">
+            ₹{{ product.price }}
+        </div>
 
-        
-   
+        <a href="{% url 'product_detail' product.id %}"
+           class="btn">
+            View Details
+        </a>
 
     </div>
-    {% endfor %}
 
 </div>
+
+{% endfor %}
+
 </div>
-<!-- <a href="{% url 'cart' %}">Cart</a> -->
+
+<footer>
+
+    <h3>Virtual Shopping</h3>
+
+    <p>© 2026 All Rights Reserved</p>
+
+</footer>
+
 </body>
 </html>
