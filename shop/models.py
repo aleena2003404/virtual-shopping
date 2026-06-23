@@ -23,13 +23,13 @@ class Product(models.Model):
         return self.name
    
 
-class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
+# class Cart(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     quantity = models.IntegerField(default=1)
 
-    def __str__(self):
-        return self.product.name
+#     def __str__(self):
+#         return self.product.name
 class Order(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
@@ -63,4 +63,7 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.product.name} (Qty: {self.quantity})"
-    
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)

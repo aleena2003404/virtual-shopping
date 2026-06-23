@@ -13,7 +13,11 @@
     <h1 class="text-center mb-4">🛒 Shopping Cart</h1>
 
     {% for item in cart_items %}
-
+    
+<img src="{{ item.product.image.url }}"
+     width="120"
+     height="120"
+     class="mb-3">
     <div class="card shadow-sm mb-3">
         <div class="card-body">
 

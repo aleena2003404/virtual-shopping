@@ -176,7 +176,15 @@
             padding:20px;
             margin-top:40px;
         }
+        .category{
+            text-align:center;
+            font-weight:bold;
+            cursor:pointer;
+            text-decoration:none;
+            color:black;
 
+       
+}
     </style>
 </head>
 <body>
@@ -219,12 +227,16 @@
 
 <div class="categories">
 
-    <div class="category">📱 Mobiles</div>
-    <div class="category">👗 Fashion</div>
-    <div class="category">💻 Electronics</div>
-    <div class="category">📚 Books</div>
-    <div class="category">🛒 Grocery</div>
-    <div class="category">💄 Beauty</div>
+    <a href="{% url 'home' %}" class="category">
+        All
+    </a>
+
+    {% for category in categories %}
+        <a href="?category={{ category.id }}"
+           class="category">
+            {{ category.name }}
+        </a>
+    {% endfor %}
 
 </div>
 

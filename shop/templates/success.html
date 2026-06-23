@@ -1,5 +1,91 @@
-<h1>🎉 Order Placed Successfully</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+<style>
+    body{
+        font-family:Arial, Helvetica, sans-serif;
+       background: linear-gradient(135deg, rgb(234, 224, 224), #00aeff);
+    }
+    h1{
+    text-align: center;
+    margin-top: 100px;
+    animation: fadeIn 2s ease-in-out;
+    color: yellowgreen;
+    font-size: 40px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+    a{
+        display:block;
+        text-align:center;
+        margin-top:20px;
+        text-decoration:solid;
+        color:blue;
+        animation: fadeIn 2s ease-in-out;
+    
+    font-size: 20px;
+
+    }
+    @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 2;
+    }
+}
+    h3{
+        text-align:center;
+        margin-top:100px;
+        display:flex;
+        justify-content:center;
+        text-decoration:solid;
+        color:green;
+        font-size:30px;
+        animation: fadeIn 2s ease-in-out;
+    
+    font-size: 40px;
+
+    }
+    @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 4;
+    }
+}
+
+</style>
+</head>
+<body>
+    <h1>🎉 Order Placed Successfully</h1>
+     <lottie-player
+        src="https://assets10.lottiefiles.com/packages/lf20_touohxv0.json"
+        background="transparent"
+        speed="1"
+        style="width:1300px;height:100px;"
+        autoplay>
+    </lottie-player>
 
 <a href="{% url 'home' %}">
-    Continue Shopping
+    <h2>🎉 continue shopping</h2>
+   
 </a>
+<h3>Thank you for your purchase!</h3>
+</body>
+</html>
+
+

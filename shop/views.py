@@ -93,3 +93,48 @@ def checkout(request):
     return render(request,'checkout.html')
 def success(request):
     return render(request,'success.html')
+from .models import Product, Category
+
+def home(request):
+    category_id = request.GET.get('category')
+
+    if category_id:
+        products = Product.objects.filter(category_id=category_id)
+    else:
+        products = Product.objects.all()
+
+    categories = Category.objects.all()
+
+    return render(request, 'home.html', {
+        'products': products,
+        'categories': categories
+    })
+from .models import Product, Cart
+
+# def add_to_cart(request, product_id):
+#     product = Product.objects.get(id=product_id)
+
+#     Cart.objects.create(
+#         user=request.user,
+#         product=product,
+#         quantity=1
+#     )
+
+#     return redirect('cart')
+def add_to_cart(request, product_id):
+    product = Product.objects.get(id=product_id)
+    quantity = int(request.POST.get('quantity', 1))
+
+    cart_item, created = Cart.objects.get_or_create(
+        user=request.user,
+        product=product
+    )
+
+    if created:
+        cart_item.quantity = quantity
+    else:
+        cart_item.quantity += quantity
+
+    cart_item.save()
+
+    return redirect('cart')
