@@ -16,4 +16,7 @@ path('home/', views.home, name='home'),
 path('checkout/', views.checkout, name='checkout'),
 path('success/', views.success, name='success'),
 path('add-to-cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+path('remove-cart/<int:cart_id>/', views.remove_cart, name='remove_cart'),
+  path('checkout/', views.checkout, name='checkout'),
+path('order-success/', views.order_success, name='order_success'),
 ]

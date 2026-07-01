@@ -3,7 +3,7 @@ from .models import Product
 from .models import Cart
 # Create your views here.
 
-
+     
 
 def login(request):
     return render(request,'login.html')
@@ -138,3 +138,57 @@ def add_to_cart(request, product_id):
     cart_item.save()
 
     return redirect('cart')
+from django.shortcuts import get_object_or_404, redirect
+
+def remove_cart(request, cart_id):
+    cart_item = get_object_or_404(Cart, id=cart_id)
+    cart_item.delete()
+    return redirect('cart')
+def place_order(request):
+    cart_items = Cart.objects.filter(user=request.user)
+
+    for item in cart_items:
+        product = item.product
+
+        product.stock -= item.quantity
+        product.save()
+
+    return redirect('success')
+from django.shortcuts import render, redirect
+from .forms import OrderForm
+from .models import Cart
+
+def checkout(request):
+
+    cart_items = Cart.objects.filter(user=request.user)
+
+    total = 0
+
+    for item in cart_items:
+        total += item.product.price * item.quantity
+
+    if request.method == "POST":
+
+        form = OrderForm(request.POST)
+
+        if form.is_valid():
+
+            order = form.save(commit=False)
+            order.user = request.user
+            order.total_amount = total
+            order.save()
+
+            cart_items.delete()
+
+            return redirect('order_success')
+
+    else:
+        form = OrderForm()
+
+    return render(request, 'checkout.html', {
+        'form': form,
+        'cart_items': cart_items,
+        'total': total
+    })
+def order_success(request):
+    return render(request, 'order_success.html')

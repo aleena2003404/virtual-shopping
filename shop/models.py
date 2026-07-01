@@ -1,8 +1,6 @@
-
-
-# Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -21,15 +19,17 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-   
 
-# class Cart(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     quantity = models.IntegerField(default=1)
 
-#     def __str__(self):
-#         return self.product.name
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.product.name
+
+
 class Order(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
@@ -38,7 +38,7 @@ class Order(models.Model):
         ('delivered', 'Delivered'),
         ('cancelled', 'Cancelled'),
     ]
-    
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
@@ -48,11 +48,11 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f"Order #{self.id} - {self.name}"
-    
     class Meta:
         ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Order #{self.id} - {self.name}"
 
 
 class OrderItem(models.Model):
@@ -63,7 +63,3 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.product.name} (Qty: {self.quantity})"
-class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)

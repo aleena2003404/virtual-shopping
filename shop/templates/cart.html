@@ -37,16 +37,23 @@
 
         </div>
     </div>
-
+    <a href="{% url 'checkout' %}"
+    class="btn btn-primary">
+    Proceed to Checkout
+</a>
+<a href="{% url 'remove_cart' item.id %}"
+   class="btn btn-danger">
+    Delete
+</a>
     {% empty %}
 
     <div class="alert alert-warning">
         Your cart is empty.
     </div>
-
-    {% endfor %}
+     {% endfor %}
 
 </div>
 
 </body>
 </html>
+      
