@@ -75,22 +75,8 @@ def user_logout(request):
     return redirect('login')
 def index(request):
     return render(request, 'index.html')
-from .models import Order
 
-def checkout(request):
-
-    if request.method == 'POST':
-
-        Order.objects.create(
-            name=request.POST['name'],
-            phone=request.POST['phone'],
-            address=request.POST['address'],
-            total_amount=0
-        )
-
-        return redirect('success')
-
-    return render(request,'checkout.html')
+     
 def success(request):
     return render(request,'success.html')
 from .models import Product, Category
@@ -156,7 +142,7 @@ def place_order(request):
     return redirect('success')
 from django.shortcuts import render, redirect
 from .forms import OrderForm
-from .models import Cart
+from .models import Cart, OrderItem
 
 def checkout(request):
 
@@ -173,11 +159,37 @@ def checkout(request):
 
         if form.is_valid():
 
+            # Save Order
             order = form.save(commit=False)
             order.user = request.user
             order.total_amount = total
             order.save()
 
+            # Save Order Items and Update Stock
+            for item in cart_items:
+
+                # Save each product in OrderItem table
+                OrderItem.objects.create(
+                    order=order,
+                    product=item.product,
+                    quantity=item.quantity,
+                    price=item.product.price
+                )
+
+                # Reduce Product Stock
+                # Reduce Product Stock
+                product = item.product
+                if product.stock < item.quantity:
+                    return render(request, 'checkout.html', {
+        'form': form,
+        'cart_items': cart_items,
+        'total': total,
+        'error': f"{product.name} is out of stock."
+    })
+                product.stock -= item.quantity
+                product.save()
+
+            # Clear Cart
             cart_items.delete()
 
             return redirect('order_success')
